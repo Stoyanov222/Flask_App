@@ -135,6 +135,12 @@
             <button type="submit">Calculate</button>
         </form>
 
+        {% if error_message %}
+        <div class="error-message">
+            <p>{{ error_message }}</p>
+        </div>
+        {% endif %}
+        
         {% if result %}
         <div class="result-container">
             <h2>Calculation Results</h2>

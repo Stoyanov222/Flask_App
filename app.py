@@ -18,36 +18,39 @@ def calculate_result():
     error_message = None
 
     if request.method == 'POST':
-        age = int(request.form['age'])
-        height = int(request.form['height'])
-        weight = int(request.form['weight'])
-        gender = request.form.get('gender')
-        protein = float(request.form.get('protein'))
-        calories = int(request.form.get('calories'))
-        weight_lb = weight * 2.2
+        try:
 
-        bmr = calculate_bmr(age, height, weight, gender)
+            age = int(request.form['age'])
+            height = int(request.form['height'])
+            weight = int(request.form['weight'])
+            gender = request.form.get('gender')
+            protein = float(request.form.get('protein'))
+            calories = int(request.form.get('calories'))
+            weight_lb = weight * 2.2
 
-        sedentery_cals = bmr * 1.2 + calories
-        light_cals = bmr * 1.35 + calories
-        moderate_cals = bmr * 1.5 + calories
-        high_cals = bmr * 1.68 + calories
-        protein_per_day = weight_lb * protein
-        protein_per_day_cals = protein * 4
+            bmr = calculate_bmr(age, height, weight, gender)
 
-        
-        result = f"""
-                Your BMR is: {round(bmr)} calories/day
+            sedentery_cals = bmr * 1.2 + calories
+            light_cals = bmr * 1.35 + calories
+            moderate_cals = bmr * 1.5 + calories
+            high_cals = bmr * 1.68 + calories
+            protein_per_day = weight_lb * protein
+            protein_per_day_cals = protein * 4
 
-                Caloric needs based on activity level:
-                Sedentary: {round(sedentery_cals)} cal/day
-                Lightly active: {round(light_cals)} cal/day
-                Moderately active: {round(moderate_cals)} cal/day
-                Very active: {round(high_cals)} cal/day
+            result = f"""
+                    Your BMR is: {round(bmr)} calories/day
 
-                Protein per day: {round(protein_per_day)}g / {round(protein_per_day_cals)} cal
-                Caloric adjustment: {int(calories)} cal
-"""
+                    Caloric needs based on activity level:
+                    Sedentary: {round(sedentery_cals)} cal/day
+                    Lightly active: {round(light_cals)} cal/day
+                    Moderately active: {round(moderate_cals)} cal/day
+                    Very active: {round(high_cals)} cal/day
+
+                    Protein per day: {round(protein_per_day)}g / {round(protein_per_day_cals)} cal
+                    Caloric adjustment: {int(calories)} cal
+    """
+        except ValueError:
+            error_message = "Please ensure all fields are filled out correctly."
 
     return render_template('bmr_page.html', result=result, error_message=error_message)
 
