@@ -92,29 +92,33 @@
 <body>
     <div class="container">
 
-        <img src="{{ url_for('static', filename='images/4LOGO1.png') }}" alt="Profile Picture" class="profile-pic">
+        <a href="{{ url_for('calculate_result') }}">
+            <img src="{{ url_for('static', filename='images/4LOGO1.png') }}" alt="Profile Picture" class="profile-pic">
+        </a>
 
         <h2>BMR Calculator</h2>
         <p>This is a demo project.</p>
 
         <form action="/" method="POST">
             <label for="age">Enter your age:</label>
-            <input type="text" id="age" name="age">
+            <input type="text" id="age" name="age" placeholder="e.g., 25">
 
             <label for="height">Enter your height (cm):</label>
-            <input type="text" id="height" name="height">
+            <input type="text" id="height" name="height" placeholder="e.g., 170">
 
             <label for="weight">Enter your weight (kg):</label>
-            <input type="text" id="weight" name="weight">
+            <input type="text" id="weight" name="weight" placeholder="e.g., 70">
 
             <label for="gender">Select your gender:</label>
             <select name="gender" id="gender">
+                <option value="Select Gender" selected>--</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
 
             <label for="protein">Protein g/lb Bodyweight:</label>
             <select id="protein" name="protein">
+                <option value="Select Protein" selected>--</option>
                 {% for i in range(3, 16) %}
                 <option value="{{ i / 10 }}">{{ i / 10 }}</option>
                 {% endfor %}
@@ -122,7 +126,7 @@
 
             <label for="calories">Select Additional daily calories for gain or reduce for weight loss:</label>
             <select id="calories" name="calories">
-                <option value="0" selected>0</option>
+                <option value="Select Calories" selected>--</option>
                 {% for i in range(-1000, 1500, 100) %}
                 <option value="{{ i }}">{{ i }}</option>
                 {% endfor %}

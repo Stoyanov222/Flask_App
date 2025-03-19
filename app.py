@@ -13,7 +13,7 @@ def calculate_bmr(age, height, weight, gender):
 
 
 @app.route('/', methods=['GET', 'POST'])
-def hello():
+def calculate_result():
     result = None
     error_message = None
 
@@ -27,7 +27,7 @@ def hello():
         weight_lb = weight * 2.2
 
         bmr = calculate_bmr(age, height, weight, gender)
-        
+
         sedentery_cals = bmr * 1.2 + calories
         light_cals = bmr * 1.35 + calories
         moderate_cals = bmr * 1.5 + calories
@@ -49,7 +49,7 @@ def hello():
                 Caloric adjustment: {int(calories)} cal
 """
 
-    return render_template('hello.html', result=result, error_message=error_message)
+    return render_template('bmr_page.html', result=result, error_message=error_message)
 
 
 if __name__ == '__main__':
