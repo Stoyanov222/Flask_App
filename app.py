@@ -14,8 +14,8 @@ login_manager.login_view = 'login'  # Where to redirect if not logged in
 
 # Dummy User Data (You should use a database in production)
 users = {
-    'Stoyan': {'password': 'Stoyan!'},
-    'Slaveya': {'password': 'Slaveya!'}
+    'user1': {'password': 'sfitapp'},
+    'user2': {'password': 'sfitapp'}
 }
 
 # User class for Flask-Login
