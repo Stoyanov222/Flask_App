@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin-left: 20%;
+            margin-right: 20%;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .container {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 350px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+
+        .menu {
+            background-color: rgba(226, 225, 225, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: auto;
+        }
+
+        .menu a {
+            display: block;
+            margin: 10px auto;
+            padding: 15px;
+            background-color: #606060;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .menu a:hover {
+            background-color: #eb4d6a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Logo -->
+        <img src="{{ url_for('static', filename='images/4LOGO1.png') }}" alt="Logo" class="logo">
+
+        <h1>Main Page</h1>
+        <p>Welcome to the tool selection page. Choose an option below:</p>
+
+        <div class="menu">
+            <a href="{{ url_for('calculate_result') }}">BMR Calculator</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

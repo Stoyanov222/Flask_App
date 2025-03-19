@@ -7,18 +7,31 @@
     <title>BMR Calculator</title>
     <style>
         body {
-            background-color: #89d6f7;
+            background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+            background-size: cover;
+            /* Ensures the image covers the entire background */
+            background-position: center;
+            /* Centers the image */
+            background-repeat: no-repeat;
+            /* Prevents the image from repeating */
             font-family: Arial, sans-serif;
             padding: 20px;
             /* Add padding to ensure content does not stick to the border */
             margin: 20px;
             margin-left: 20%;
             margin-right: 20%;
+            color: white;
+        }
+
+        label {
+            color: black;
+            /* Ensures headings, paragraphs, and labels are white */
         }
 
         .container {
             text-align: center;
             padding: 20px;
+            padding-bottom: 50px;
         }
 
         h1 {
@@ -34,10 +47,10 @@
         }
 
         form {
-            background-color: rgb(226, 225, 225);
+            background-color: #e9e7e7;
             padding: 20px;
             border-radius: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             width: 300px;
             margin: auto;
         }
@@ -81,10 +94,50 @@
 
         .result-container h2 {
             margin-bottom: 10px;
+            color: black;
         }
 
         .result-container p {
             margin: 5px 0;
+            color: black;
+            border-bottom: 1px solid rgb(8, 8, 8);
+            /* Thin white line between results */
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        .result-container p:last-child {
+            border-bottom: none;
+            /* Removes the line from the last item */
+        }
+
+        .bottom-button {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px 15px;
+            background-color: #606060;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            width: 300px;
+            margin-left: 407px;
+        }
+
+        .bottom-button a {
+            display: block;
+            margin: 10px auto;
+            padding: 15px;
+            background-color: #606060;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .bottom-button:hover {
+            background-color: #eb4d6a;
         }
     </style>
 </head>
@@ -99,7 +152,7 @@
         <h2>BMR Calculator</h2>
         <p>This is a demo project.</p>
 
-        <form action="/" method="POST">
+        <form action="/bmr" method="POST">
             <label for="age">Enter your age:</label>
             <input type="text" id="age" name="age" placeholder="e.g., 25">
 
@@ -140,15 +193,16 @@
             <p>{{ error_message }}</p>
         </div>
         {% endif %}
-        
+
         {% if result %}
         <div class="result-container">
-            <h2>Calculation Results</h2>
+            <h2>Calculation Results:</h2>
             {% for item in result.split('\n') %}
             <p>{{ item }}</p>
             {% endfor %}
         </div>
         {% endif %}
+        <a href="{{ url_for('main_page') }}" class="bottom-button">⬅ Back to Main Menu</a>
     </div>
 </body>
 

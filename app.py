@@ -10,9 +10,12 @@ def calculate_bmr(age, height, weight, gender):
         return 66 + (13.7 * weight) + (5 * height) - (6.8 * age)
     else:
         return 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age)
+    
+@app.route('/')
+def main_page():
+    return render_template('index.html')
 
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/bmr', methods=['GET', 'POST'])
 def calculate_result():
     result = None
     error_message = None
@@ -39,13 +42,11 @@ def calculate_result():
 
             result = f"""
                     Your BMR is: {round(bmr)} calories/day
-
-                    Caloric needs based on activity level:
-                    Sedentary: {round(sedentery_cals)} cal/day
-                    Lightly active: {round(light_cals)} cal/day
+                    Caloric needs based on activity level: 
+                    Sedentary: {round(sedentery_cals)} cal/day 
+                    Lightly active: {round(light_cals)} cal/day 
                     Moderately active: {round(moderate_cals)} cal/day
                     Very active: {round(high_cals)} cal/day
-
                     Protein per day: {round(protein_per_day)}g / {round(protein_per_day_cals)} cal
                     Caloric adjustment: {int(calories)} cal
     """
