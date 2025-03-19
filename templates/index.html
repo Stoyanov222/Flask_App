@@ -61,6 +61,25 @@
         .menu a:hover {
             background-color: #eb4d6a;
         }
+
+        .logout-button {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px 15px;
+            background-color: #606060;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .logout-button:hover {
+            background-color: #eb4d6a;
+        }
     </style>
 </head>
 
@@ -68,15 +87,18 @@
 
     <div class="container">
         <!-- Logo -->
+        <a href="{{ url_for('main_page') }}">
         <img src="{{ url_for('static', filename='images/4LOGO1.png') }}" alt="Logo" class="logo">
-
-        <h1>Home</h1>
-        <p>Welcome to the tool selection page. Choose an option below:</p>
+        </a>
+        <p>Welcome, <b>{{ current_user.id}}</b> to the tool selection page. Choose an option below:.</p>
 
         <div class="menu">
             <a href="{{ url_for('calculate_result') }}">BMR Calculator</a>
         </div>
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
     </div>
+
+    
 
 </body>
 

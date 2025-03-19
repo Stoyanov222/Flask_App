@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin-left: 20%;
+            margin-right: 20%;
+            display: flex;
+            flex-direction: column;
+            color: rgb(0, 0, 0);
+        }
+
+        .container {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 350px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 24px;
+        }
+
+        .login-form {
+            background-color: rgba(226, 225, 225, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: auto;
+        }
+
+        .login-form p {
+            margin-bottom: 15px;
+        }
+
+        .login-form input {
+            padding: 10px;
+            width: 90%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .login-form button {
+            background-color: #606060;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .login-form button:hover {
+            background-color: #eb4d6a;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Logo -->
+        <a href="{{ url_for('login') }}">
+            <img src="{{ url_for('static', filename='images/4LOGO1.png') }}" alt="Logo" class="logo">
+        </a>
+
+        <h1>Login Form</h1>
+
+        <div class="login-form">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }}<br>
+                    {{ form.username(size=20) }}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password(size=20) }}
+                </p>
+                <button type="submit">Login</button>
+            </form>
+
+            <!-- Flash message for login errors -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="error-message">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+</body>
+
+</html>

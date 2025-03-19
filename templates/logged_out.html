@@ -1,0 +1,73 @@
+<!-- templates/logged_out.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 350px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+
+        .message {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .login-button {
+            font-size: 16px;
+            color: white;
+            background-color: #eb4d6a;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #c13552;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo -->
+        <a href="{{ url_for('login') }}">
+            <img src="{{ url_for('static', filename='images/4LOGO1.png') }}" alt="Logo" class="logo">
+        </a>
+
+        <h1>You have been successfully logged out!</h1>
+        <p class="message">Thank you for using our tool. You can log in again to access your account.</p>
+        <form action="{{ url_for('login') }}" method="get">
+            <button type="submit" class="login-button">Login Again</button>
+        </form>
+    </div>
+
+</body>
+</html>
