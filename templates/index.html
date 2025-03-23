@@ -87,10 +87,10 @@
 
     <div class="container">
         <!-- Logo -->
-        <a href="{{ url_for('main_page') }}">
+        <a href="{{ url_for('index') }}">
         <img src="{{ url_for('static', filename='images/4LOGO1.png') }}" alt="Logo" class="logo">
         </a>
-        <p>Welcome, <b>{{ current_user.id}}</b> to the tool selection page. Choose an option below:.</p>
+        <p>Welcome, <b>{{ current_user.username}}</b> to the tool selection page. Choose an option below:.</p>
 
         <div class="menu">
             <a href="{{ url_for('calculate_result') }}">BMR Calculator</a>

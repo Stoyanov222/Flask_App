@@ -164,7 +164,7 @@
 <body>
     <div class="container">
 
-        <a href="{{ url_for('main_page') }}">
+        <a href="{{ url_for('index') }}">
             <img src="{{ url_for('static', filename='images/4LOGO1.png') }}" alt="Profile Picture" class="profile-pic">
         </a>
 
@@ -222,7 +222,7 @@
         </div>
         {% endif %}
 
-        <a href="{{ url_for('main_page') }}" class="bottom-button">⬅ Back to Main Menu</a>
+        <a href="{{ url_for('index') }}" class="bottom-button">⬅ Back to Main Menu</a>
         <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
     </div>
 </body>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Sign Up</title>
     <style>
         body {
             background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
@@ -98,7 +98,7 @@
             <img src="{{ url_for('static', filename='images/4LOGO1.png') }}" alt="Logo" class="logo">
         </a>
 
-        <h1>Login Form</h1>
+        <h1>Create a New Account</h1>
 
         <div class="login-form">
             <form method="POST">
@@ -111,10 +111,13 @@
                     {{ form.password.label }}<br>
                     {{ form.password(size=20) }}
                 </p>
-                <button type="submit">Login</button>
+                <p>
+                    {{ form.confirm_password.label }}<br>
+                    {{ form.confirm_password(size=20) }}
+                </p>
+                <button type="submit">Sign Up</button>
             </form>
 
-            <!-- Flash message for login errors -->
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     <div class="error-message">
@@ -126,7 +129,7 @@
             {% endwith %}
         </div>
 
-        <a href="{{ url_for('signup') }}" class="signup-link">Don't have an account? Create one here.</a>
+        <a href="{{ url_for('login') }}" class="signup-link">Already have an account? Login here.</a>
     </div>
 
 </body>
