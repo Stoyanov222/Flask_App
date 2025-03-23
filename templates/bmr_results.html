@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMR Results</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .result-container {
+            background-color: #f0f0f0;
+            width: 300px;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result-container h2 {
+            color: black;
+        }
+
+        .result-container p {
+            color: black;
+            border-bottom: 1px solid black;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        .result-container p:last-child {
+            border-bottom: none;
+        }
+
+        .bottom-button {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px 15px;
+            background-color: #606060;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            width: 300px;
+            margin-left: 850px;
+        }
+
+        .bottom-button:hover {
+            background-color: #eb4d6a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your BMR Results</h1>
+
+        {% if result %}
+        <div class="result-container">
+            <h2>Calculation Results:</h2>
+            {% for key, value in result.items() %}
+            <p><strong>{{ key }}:</strong> {{ value }}</p>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No results found. Please calculate BMR first.</p>
+        {% endif %}
+
+        <a href="{{ url_for('calculate_result') }}" class="bottom-button">⬅ Back to BMR Calculator</a>
+        <a href="{{ url_for('index') }}" class="bottom-button">🏠 Back to Main Menu</a>
+    </div>
+</body>
+</html>

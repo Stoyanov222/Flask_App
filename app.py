@@ -158,7 +158,6 @@ def calculate_bmr(age, height, weight, gender):
     else:
         return 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age)
 
-
 @app.route('/bmr', methods=['GET', 'POST'])
 def calculate_result():
     result = None
@@ -166,7 +165,6 @@ def calculate_result():
 
     if request.method == 'POST':
         try:
-
             age = int(request.form['age'])
             height = int(request.form['height'])
             weight = int(request.form['weight'])
@@ -177,30 +175,48 @@ def calculate_result():
 
             bmr = calculate_bmr(age, height, weight, gender)
 
-            sedentery_cals = bmr * 1.2 + calories
+            sedentary_cals = bmr * 1.2 + calories
             light_cals = bmr * 1.35 + calories
             moderate_cals = bmr * 1.5 + calories
             high_cals = bmr * 1.68 + calories
             protein_per_day = weight_lb * protein
-            protein_per_day_cals = protein * 4
+            protein_per_day_cals = protein_per_day * 4
 
-            result = f"""
-                    Your BMR is: {round(bmr)} calories/day
-                    Caloric needs based on activity level: 
-                    Sedentary: {round(sedentery_cals)} cal/day 
-                    Lightly active: {round(light_cals)} cal/day 
-                    Moderately active: {round(moderate_cals)} cal/day
-                    Very active: {round(high_cals)} cal/day
-                    Protein per day: {round(protein_per_day)}g / {round(protein_per_day_cals)} cal
-                    Caloric adjustment: {int(calories)} cal
-    """
+            # Store in database
+            conn = get_db_connection()
+            try:
+                conn.execute(
+                    'INSERT INTO results (user_id, bmr, sedentary, lightly_active, moderately_active, very_active, protein_g, protein_cals, adjustment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                    (current_user.id, bmr, sedentary_cals, light_cals, moderate_cals, high_cals, protein_per_day, protein_per_day_cals, calories)
+                )
+                conn.commit()
+            finally:
+                conn.close()
+
+            result = {
+                "bmr": round(bmr),
+                "sedentary": round(sedentary_cals),
+                "lightly_active": round(light_cals),
+                "moderately_active": round(moderate_cals),
+                "very_active": round(high_cals),
+                "protein_g": round(protein_per_day),
+                "protein_cals": round(protein_per_day_cals),
+                "adjustment": calories
+            }
+
+            return render_template('bmr_results.html', result=result)
+        
         except ValueError:
             error_message = "Please ensure all fields are filled out correctly."
 
     return render_template('bmr_page.html', result=result, error_message=error_message)
 
-# Logout route
 
+@app.route('/bmr_results')
+def bmr_results():
+    return render_template('bmr_results.html', result=current_user.result)
+
+# Logout route
 
 @app.route('/logout')
 @login_required

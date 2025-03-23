@@ -174,20 +174,20 @@
         <form action="/bmr" method="POST">
             <label for="age">Enter your age:</label>
             <input type="text" id="age" name="age" placeholder="e.g., 25">
-
+        
             <label for="height">Enter your height (cm):</label>
             <input type="text" id="height" name="height" placeholder="e.g., 170">
-
+        
             <label for="weight">Enter your weight (kg):</label>
             <input type="text" id="weight" name="weight" placeholder="e.g., 70">
-
+        
             <label for="gender">Select your gender:</label>
             <select name="gender" id="gender">
                 <option value="Select Gender" selected>--</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
-
+        
             <label for="protein">Protein g/lb Bodyweight:</label>
             <select id="protein" name="protein">
                 <option value="Select Protein" selected>--</option>
@@ -195,7 +195,7 @@
                 <option value="{{ i / 10 }}">{{ i / 10 }}</option>
                 {% endfor %}
             </select>
-
+        
             <label for="calories">Select Additional daily calories for gain or reduce for weight loss:</label>
             <select id="calories" name="calories">
                 <option value="Select Calories" selected>--</option>
@@ -203,7 +203,7 @@
                 <option value="{{ i }}">{{ i }}</option>
                 {% endfor %}
             </select>
-
+        
             <button type="submit">Calculate</button>
         </form>
 
@@ -216,8 +216,8 @@
         {% if result %}
         <div class="result-container">
             <h2>Calculation Results:</h2>
-            {% for item in result.split('\n') %}
-            <p>{{ item }}</p>
+            {% for key, value in result.items() %}
+            <p><strong>{{ key }}:</strong> {{ value }}</p>
             {% endfor %}
         </div>
         {% endif %}
